@@ -1,0 +1,19 @@
+POST http://localhost:3002/accounts HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Catharina",
+  "cep": "64016700",
+  "state": "PI",
+  "city": "Teresina",
+  "neighborhood": "Nossa Senhora das Graças",
+  "street": "Rua Doutor Area Leão"
+}
+
+###
+GET http://localhost:3002/accounts/ccc9f17a-7a13-470a-aa27-1c1c8d07e70f HTTP/1.1
+content-type: application/json
+
+###
+GET http://localhost:3002/accounts HTTP/1.1
+content-type: application/json

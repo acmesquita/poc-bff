@@ -1,0 +1,2 @@
+GET http://localhost:3001/cep/64016700 HTTP/1.1
+content-type: application/json
