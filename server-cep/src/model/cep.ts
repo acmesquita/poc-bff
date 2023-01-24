@@ -1,4 +1,4 @@
-export interface CEP {
+export type CEP = {
   cep: string
   state: string
   city: string

@@ -1,14 +1,13 @@
-import { z } from 'zod'
-import { api } from '../lib/axios'
+import { z } from 'zod';
 import { CEP } from "../model/cep";
-import { FastifyRequest } from 'fastify';
 import { FindCep } from '../service/find_cep';
+import { Request } from '../adapters/fatify_request';
 
 export class CepController {
 
   constructor(private findCepService: FindCep) {}
 
-  async find(request: FastifyRequest): Promise<CEP | null> {
+  async find(request: Request): Promise<CEP | null> {
     const createParams = z.object({
       cep: z.string().length(8)
     })
