@@ -1,13 +1,15 @@
-## Implementação de um BFF (Back-end for Front-end)
+# Implementação de um BFF (Back-end for Front-end)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/15862643/214322766-54b2a278-c427-402c-9abb-03b370bf8418.png" />
+</p>
 
-![bff drawio](https://user-images.githubusercontent.com/15862643/214322766-54b2a278-c427-402c-9abb-03b370bf8418.png)
 
 Para entender o padrão e alguns usos dele dentro de um sistema distribuido, foi implementado esse projeto com a seguinte estrutura:
 
-- web: _Concentra as visualizações e chamadas ao BFF_
-- bff: _API com endpoins simples para o frontend, contudo que interage com outros sistemas para fornecer as informações_
-- server-account: _API de gerenciamento de contas_
-- server-cep: _API que disponibiliza endereços a partir de um CEP_
+- **web**: _Concentra as visualizações e chamadas ao BFF_
+- **bff**: _API com endpoins simples para o frontend, contudo que interage com outros sistemas para fornecer as informações_
+- **server-account**: _API de gerenciamento de contas_
+- **server-cep**: _API que disponibiliza endereços a partir de um CEP_
 
 ### Comunicação entre os serviços
 
@@ -35,11 +37,16 @@ GET bff/accounts/:id  --> GET server-account/accounts/:id --> Busca uma conta co
 
 Já a criação de uma nova conta temos uma visualização mais aprofundada do BFF. No processo de criação de uma conta, temos uma busca, a partir do CEP informado pelo usuário, é feito uma requisição ao BFF para trazer a informação do serviço de CEP, contudo, se o serviço estiver fora ou não souber retornar uma informação válida, é realizado uma retentativa em outro serviço, assim, garantido o funcionamento mesmo se um dos serviços estiver indisponível.
 
-![bff drawio (1)](https://user-images.githubusercontent.com/15862643/214330528-701cdb04-ab50-4fe8-989d-19bfb6889251.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/15862643/214330528-701cdb04-ab50-4fe8-989d-19bfb6889251.png" />
+</p>
+
 
 Podemos até evoluir a ideia para termos uma base local, um banco em memória por exemplo, com os endereços já pesquisados antes, assim não seria necessário buscar em um serviço externo que pode falhar e assim buscar em outro serviço, atrasando ainda mais a requisição para o frontend.
 
-![bff drawio (2)](https://user-images.githubusercontent.com/15862643/214345057-3247f6d0-cf65-46f5-9668-b995ae35e02d.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/15862643/214345057-3247f6d0-cf65-46f5-9668-b995ae35e02d.png" />
+</p>
 
 #### Traydoffs
 
