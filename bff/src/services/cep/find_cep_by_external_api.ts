@@ -3,11 +3,10 @@ import { Address } from '../../model/address';
 
 interface Params {
   cep: string
-  addresses: Address[]
 }
 
 export class FindCepByExternalAPI {
-  async find({ addresses, cep }: Params): Promise<Address | null> {
+  async find({ cep }: Params): Promise<Address | null> {
     try {
       const response = await api.get(`https://brasilapi.com.br/api/cep/v2/${cep}`)
 
@@ -20,8 +19,6 @@ export class FindCepByExternalAPI {
         neighborhood,
         street
       }
-
-      addresses.push(data)
 
       return data
 
