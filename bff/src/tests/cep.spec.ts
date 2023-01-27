@@ -26,7 +26,7 @@ describe('CepController', () => {
 
   })
 
-  it('Should return CEP model when call but principal service off', async () => {
+  it('Should return Address model when call but principal service off', async () => {
     const sut = new CepController(
       new FindCepServiceErrorSpy(),
       new FindExternalCepServiceSpy()
