@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { Request } from "../adapters/fatify_request";
-import { apiAccount } from "../lib/axios";
 import { Account } from "../model/account";
 import { ListAccount } from "../services/account/list_accounts";
 import { FindAccount } from "../services/account/find_account";
@@ -11,16 +10,30 @@ type ListResponse = Array<{
   name: string
 }>
 
+type Params = {
+  listAccountsService: ListAccount,
+  findAccountService: FindAccount,
+  createAccountService: CreateAccount
+}
+
 export class AccountController {
 
-  constructor(
-    private readonly listAccountsService: ListAccount,
-    private readonly findAccountService: FindAccount,
-    private readonly createAccountService: CreateAccount
-  ){}
+  private listAccountsService: ListAccount
+  private findAccountService: FindAccount
+  private createAccountService: CreateAccount
+
+  constructor(params: Params) {
+    this.listAccountsService = params.listAccountsService
+    this.findAccountService = params.findAccountService
+    this.createAccountService = params.createAccountService
+  }
 
   async list(): Promise<ListResponse> {
     const accounts = await this.listAccountsService.list()
+
+    if (accounts.length === 0) {
+      return []
+    }
 
     return accounts.map(account => ({
       id: account.id,
@@ -50,6 +63,8 @@ export class AccountController {
 
     const body = createAccountBody.parse(request.body)
 
-    return await this.createAccountService.create(body)
+    const response = await this.createAccountService.create(body)
+
+    return response
   }
 }

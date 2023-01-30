@@ -1,5 +1,4 @@
 import { apiAccount } from "../../lib/axios";
-import { Account } from "../../model/account";
 
 interface BodyCreateAccount {
   name: string
@@ -12,6 +11,8 @@ interface BodyCreateAccount {
 
 export class CreateAccount {
   async create(body: BodyCreateAccount): Promise<void> {
-    return await apiAccount.post(`/accounts`, body)
+    const response = await apiAccount.post(`/accounts`, body)
+
+    return response.data
   }
 }

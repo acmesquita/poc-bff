@@ -5,14 +5,14 @@ import { ListAccount } from "../services/account/list_accounts";
 import { FindAccount } from "../services/account/find_account";
 import { CreateAccount } from "../services/account/create_account";
 
-const accountController = new AccountController(
-  new ListAccount(),
-  new FindAccount(),
-  new CreateAccount()
-)
 
 export function accountRouter(app: FastifyInstance, _: any, done: any) {
-  app.get('/accounts', accountController.list)
+  const accountController = new AccountController({
+    createAccountService: new CreateAccount(),
+    findAccountService: new FindAccount(),
+    listAccountsService: new ListAccount(),
+  })
+  app.get('/accounts', async () => accountController.list())
   app.get('/accounts/:id', async (request) => accountController.find(adapter(request)))
   app.post('/accounts', async (request) => accountController.create(adapter(request)))
 

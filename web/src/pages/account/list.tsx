@@ -3,7 +3,7 @@ import { Account } from "../../@types/account";
 
 export function ListAccounts() {
 
-  const accounts = useLoaderData() as Partial<Account>[];
+  const accounts = useLoaderData() as Account[] || [];
 
   return (
     <div style={{

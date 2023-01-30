@@ -12,13 +12,13 @@ interface Account {
   street: string
 }
 
-const accouts: Account[] = []
+const accounts: Account[] = []
 
 
 export function accountRouter(app: FastifyInstance, _: any, done: any) {
   app.get('/accounts', async () => {
     return {
-      accouts
+      accounts
     }
   })
 
@@ -29,7 +29,7 @@ export function accountRouter(app: FastifyInstance, _: any, done: any) {
 
     const { id } = createParam.parse(request.params)
 
-    return accouts.find(account => account.id === id) ?? {}
+    return accounts.find(account => account.id === id) ?? {}
   })
 
   app.post('/accounts', async (request) => {
@@ -61,7 +61,7 @@ export function accountRouter(app: FastifyInstance, _: any, done: any) {
       street,
     }
 
-    accouts.push(data)
+    accounts.push(data)
 
     return data
   })
